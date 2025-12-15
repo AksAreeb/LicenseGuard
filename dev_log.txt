@@ -3,3 +3,4 @@ Milestone: Setup basic Python script to parse requirements.txt on 2025-12-01
 Milestone: Integrate Google Deps.dev API for license lookups on 2025-12-05
 Milestone: Refactor: Added argparse for custom policy paths on 2025-12-09
 Milestone: Feature: Added high-visibility Governance Alert logs on 2025-12-12
+Milestone: Security: Implemented strict exit codes for CI/CD failure on 2025-12-15
