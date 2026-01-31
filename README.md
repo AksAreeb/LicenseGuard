@@ -16,12 +16,37 @@ In modern development, a single `npm install` can introduce a library with a **G
 
 ## How It Works
 LicenseGuard integrates directly into your **GitHub Actions** workflow:
-1. **Intercepts:** Triggers whenever a Pull Request is opened.
-2. **Scans:** Analyzes `package.json`, `requirements.txt`, or `go.mod`.
+1. **Intercepts:** Triggers on push or pull request.
+2. **Scans:** Analyzes `requirements.txt` (Python/PyPI).
 3. **Validates:** Checks licenses against the [Google Deps.dev API](https://deps.dev/).
 4. **Enforces:** Blocks the merge if a dependency violates your `policy.json`.
 
+## Usage
 
+Add to your `.github/workflows/license-guard.yml`:
+
+```yaml
+name: License Guard
+on: [push, pull_request]
+jobs:
+  license-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./
+        with:
+          policy-path: ./policy.json
+          requirements-path: ./requirements.txt
+```
+
+Or use the public action (once published):
+
+```yaml
+- uses: your-username/LicenseGuard@v1
+  with:
+    policy-path: ./policy.json
+    requirements-path: ./requirements.txt
+```
 
 ## Configuration
 Define your organization's risk tolerance in the `policy.json` file:
@@ -29,6 +54,8 @@ Define your organization's risk tolerance in the `policy.json` file:
 ```json
 {
   "approved": ["MIT", "Apache-2.0", "BSD-3-Clause"],
-  "restricted": ["GPL-3.0", "AGPL-3.0", "LGPL-3.0"],
-  "fail_on_restricted": true
+  "restricted": ["GPL-3.0", "AGPL-3.0", "LGPL-3.0"]
 }
+```
+
+This project is completely open source and usable by anyone!

@@ -1,0 +1,23 @@
+name: 'LicenseGuard'
+description: 'Enforces open-source license compliance by scanning dependencies against a configurable policy'
+author: 'LicenseGuard'
+branding:
+  icon: 'shield'
+  color: 'blue'
+
+inputs:
+  policy-path:
+    description: 'Path to the license policy JSON file'
+    required: false
+    default: './policy.json'
+  requirements-path:
+    description: 'Path to the requirements.txt file to scan'
+    required: false
+    default: './requirements.txt'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.policy-path }}
+    - ${{ inputs.requirements-path }}
